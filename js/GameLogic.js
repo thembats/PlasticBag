@@ -3,15 +3,15 @@ var ctx = canvas.getContext("2d");
 
 var maxIndex = 6;
 var speedIndex = 6;
-var obstacleSpeeds = [3, 5, 7, 9, 7, 5, 3];
+var obstacleSpeeds = [4, 6, 8, 10, 8, 6, 4];
 var bagSpeeds = [-6, -4, -2, 0, 2, 4, 6];
 
 var leftKeyPressed = false;
 var rightKeyPressed = false;
 
-var bag = new Bag(32, 32, 64, 96, bagSpeeds[speedIndex]);
-var rightWall = new Obstacle(64, canvas.height, canvas.width - 64, 0, 0);
-var leftWall = new Obstacle(64, canvas.height, 0, 0, 0);
+var bag = new Bag(96, 96, 20, bagSpeeds[speedIndex]);
+var rightWall = new Obstacle(60, canvas.height, canvas.width - 64, 0, 0);
+var leftWall = new Obstacle(60, canvas.height, 0, 0, 0);
 
 var pathways = new Map();
 pathways.set("path1", new Pathway());
@@ -27,6 +27,31 @@ function updateSpeedIndex() {
     speedIndex++;
   } else if (leftKeyPressed && speedIndex > 0) {
     speedIndex--;
+  }
+}
+
+function checkCollisions() {
+  // tests if bag hit a wall
+  if (bag.x < rightWall.width + bag.radius || bag.x > (canvas.width - rightWall.width - bag.radius)) {
+    alert("GAME OVER");
+    document.location.reload();
+    clearInterval(interval); // Needed for Chrome to end game
+  }
+
+  for (const [key, value] of pathways.entries()) {
+    if (bag.x > value.getRightX() - bag.radius
+      && bag.x < value.getRightX() + value.getRightWidth() - bag.radius
+      && bag.y > value.getRightY() - bag.radius
+      && bag.y < value.getRightY() + value.getRightHeight() - bag.radius
+      || bag.x > value.getLeftX() - bag.radius
+      && bag.x < value.getLeftX() + value.getLeftWidth() + bag.radius - 8
+      && bag.y > value.getLeftY() - bag.radius
+      && bag.y < value.getLeftY() + value.getLeftHeight() - bag.radius
+    ) {
+      alert("GAME OVER");
+      document.location.reload();
+      clearInterval(interval); // Needed for Chrome to end game
+    }
   }
 }
 
@@ -60,6 +85,7 @@ function updateAllPathways() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   bag.drawBag();
   rightWall.drawObstacle();
   leftWall.drawObstacle();
@@ -71,13 +97,9 @@ function draw() {
 
   // move bag and obstacle
   bag.x += bagSpeeds[speedIndex];
+  checkCollisions();
   updateAllPathways();
-  // tests if bag hit a wall
-  if (bag.x < rightWall.width || bag.x > (canvas.width - (rightWall.width * 1.5))) {
-    alert("GAME OVER");
-    document.location.reload();
-    clearInterval(interval); // Needed for Chrome to end game
-  }
+
 }
 
 document.addEventListener("keydown", keyDownHandler, false);
