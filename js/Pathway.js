@@ -4,51 +4,52 @@ function Pathway() {
   var rightWidth = playableArea - randWidth;
   var left = new Obstacle(randWidth, 36, rightWall.width, canvas.height + 20, 0);
   var right = new Obstacle(rightWidth, 36, (canvas.width - leftWall.width) - rightWidth, canvas.height + 20, 0);
-
+  var hasPassed = false;
+   
   this.drawPathway = function () {
-    left.drawObstacle();
-    right.drawObstacle();
+      left.drawObstacle();
+      right.drawObstacle();
   }
 
   this.setY = function (y) {
-    left.y = y;
-    right.y = y;
+      left.y = y;
+      right.y = y;
   }
 
   this.getY = function () {
-    return left.y;
+      return left.y;
   }
 
   this.getLeftX = function () {
-    return left.x;
+      return left.x;
   }
 
   this.getLeftY = function () {
-    return left.y;
-  }
+      return left.y;
+  } 
 
   this.getRightX = function () {
-    return right.x;
+      return right.x;
   }
 
   this.getRightY = function () {
-    return right.y;
+      return right.y;
   }
 
   this.getRightWidth = function () {
-    return right.width;
+      return right.width;
   }
 
   this.getLeftWidth = function () {
-    return left.width;
+      return left.width;
   }
 
   this.getLeftHeight = function () {
-    return left.height;
+      return left.height;
   }
 
   this.getRightHeight = function () {
-    return right.height;
+      return right.height;
   }
 
 }
