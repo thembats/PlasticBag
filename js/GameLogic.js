@@ -30,13 +30,11 @@ function updateSpeedIndex() {
     }
 }
 
-
+// Returns true if bag collides with wall/obstacles
 function checkCollisions() {
     // tests if bag hit a wall
     if (bag.x < rightWall.width + bag.radius || bag.x > (canvas.width - rightWall.width - bag.radius)) {
-        alert("GAME OVER");
-        document.location.reload();
-        clearInterval(interval); // Needed for Chrome to end game
+        return true;
     }
 
     for (const [key, value] of pathways.entries()) {
@@ -49,11 +47,10 @@ function checkCollisions() {
             && bag.y > value.getLeftY() - bag.radius
             && bag.y < value.getLeftY() + value.getLeftHeight() + bag.radius)
         {
-            alert("GAME OVER");
-            document.location.reload();
-            clearInterval(interval); // Needed for Chrome to end game
+            return true;
         }
     }
+    return false;
 }
 
 // This function matches the speed at which the pathways move
@@ -106,7 +103,12 @@ function draw() {
     updateSpeedIndex();
 
     // move bag and obstacle
-    checkCollisions();
+    if (checkCollisions()) {
+        alert("GAME OVER");
+        document.location.reload();
+        clearInterval(interval); // Needed for Chrome to end game
+    }
+
     updateAllPathways();
     bag.x += bagSpeeds[speedIndex];
 }
