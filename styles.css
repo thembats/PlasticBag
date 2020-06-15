@@ -1,0 +1,50 @@
+* {
+  padding: 0;
+  margin: 8px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 720px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
+}
+
+.my-canvas {
+  background: #eee;
+  display: flex;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#play-button {
+  font-family: arial, sans-serif;
+  color: #FFF;
+  background-color: blue;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  
+  width: 200px;
+  box-sizing: border-box;
+}

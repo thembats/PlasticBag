@@ -1,17 +1,20 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
+var spaceKeyPressed = false;
 
-var maxIndex = 6;
-var speedIndex = 6;
-var obstacleSpeeds = [4, 6, 8, 10, 8, 6, 4];
-var bagSpeeds = [-6, -4, -2, 0, 2, 4, 6];
+var maxIndex = 0;
+var speedIndex = 0;
+var obstacleSpeeds = [0, 6, 8, 10, 8, 6, 4];
+var bagSpeeds = [0, -4, -2, 0, 2, 4, 6];
 var score = 0;
 var leftKeyPressed = false;
 var rightKeyPressed = false;
 
+
 var bag = new Bag(96, 96, 20, bagSpeeds[speedIndex]);
-var rightWall = new Obstacle(60, canvas.height, canvas.width - 64, 0, 0);
+var rightWall = new Obstacle(60, canvas.height, canvas.width - 60, 0, 0);
 var leftWall = new Obstacle(60, canvas.height, 0, 0, 0);
+
 
 var pathways = new Map();
 pathways.set("path1", new Pathway());
@@ -40,11 +43,11 @@ function checkCollisions() {
     for (const [key, value] of pathways.entries()) {
         if (bag.x > value.getRightX() - bag.radius
             && bag.x < value.getRightX() + value.getRightWidth()
-            && bag.y > value.getRightY() - bag.radius
+            && bag.y > value.getRightY() - bag.radius - 1
             && bag.y < value.getRightY() + value.getRightHeight() + bag.radius
             || bag.x > value.getLeftX()
             && bag.x < value.getLeftX() + value.getLeftWidth() + bag.radius - 8
-            && bag.y > value.getLeftY() - bag.radius
+            && bag.y > value.getLeftY() - bag.radius - 1
             && bag.y < value.getLeftY() + value.getLeftHeight() + bag.radius)
         {
             return true;
@@ -84,6 +87,16 @@ function updateAllPathways() {
     }
 }
 
+function drawInstructions() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Avoid the walls!", canvas.height / 2 + 50, canvas.width / 2 - 140);
+    ctx.fillText("Use left and right arrow keys to control the ball.", canvas.height / 2 - 40, canvas.width / 2 - 110);
+    ctx.fillText("Press Space to Start", canvas.height / 2 + 35, canvas.width / 2 - 80);
+    
+}
+
+
 function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
@@ -92,7 +105,9 @@ function drawScore() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    if (!spaceKeyPressed) {
+        drawInstructions();
+    }
     bag.drawBag();
     rightWall.drawObstacle();
     leftWall.drawObstacle();
@@ -104,7 +119,7 @@ function draw() {
 
     // move bag and obstacle
     if (checkCollisions()) {
-        alert("GAME OVER");
+        alert("Game over");
         document.location.reload();
         clearInterval(interval); // Needed for Chrome to end game
     }
@@ -121,6 +136,19 @@ function keyDownHandler(e) {
         rightKeyPressed = true;
     } else if (e.key == "Left" || e.key == "ArrowLeft") {
         leftKeyPressed = true;
+    } 
+}
+
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32){
+        maxIndex = 6;
+        speedIndex = 6;
+        obstacleSpeeds = [4, 6, 8, 10, 8, 6, 4];
+        bagSpeeds = [-6, -4, -2, 0, 2, 4, 6];
+        score = 0;
+        leftKeyPressed = false;
+        rightKeyPressed = false;  
+        spaceKeyPressed = true;
     }
 }
 
@@ -131,5 +159,6 @@ function keyUpHandler(e) {
         leftKeyPressed = false;
     }
 }
+
 // draw() will be called every 10ms
 var interval = setInterval(draw, 30);
