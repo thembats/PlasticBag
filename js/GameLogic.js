@@ -96,11 +96,11 @@ function drawInstructions() {
     
 }
 
-
 function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: " + score, leftWall.width + 10, 20);
+    ctx.fillText("Previous best: " + score, canvas.width - rightWall.width - 140, 20);
 }
 
 function draw() {
