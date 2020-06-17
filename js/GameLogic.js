@@ -5,7 +5,7 @@ var spaceKeyPressed = false;
 var maxIndex = 0;
 var speedIndex = 0;
 var obstacleSpeeds = [0, 6, 8, 10, 8, 6, 4];
-var bagSpeeds = [0, -4, -2, 0, 2, 4, 6];
+var bagSpeeds = [0, -10, -6, 0, 6, 10, 12];
 var score = 0;
 var leftKeyPressed = false;
 var rightKeyPressed = false;
@@ -50,6 +50,7 @@ function checkCollisions() {
             && bag.y > value.getLeftY() - bag.radius - 1
             && bag.y < value.getLeftY() + value.getLeftHeight() + bag.radius)
         {
+            alert('rx: ' + value.getRightX() + ' ry: ' + value.getRightY() + ' bx: ' + bag.x + ' by: ' + bag.y + ' brad: ' + bag.radius);
             return true;
         }
     }
@@ -144,7 +145,7 @@ document.body.onkeyup = function(e){
         maxIndex = 6;
         speedIndex = 6;
         obstacleSpeeds = [4, 6, 8, 10, 8, 6, 4];
-        bagSpeeds = [-6, -4, -2, 0, 2, 4, 6];
+        bagSpeeds = [-8, -6, -2, 0, 2, 6, 8];
         score = 0;
         leftKeyPressed = false;
         rightKeyPressed = false;  

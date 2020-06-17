@@ -1,6 +1,6 @@
 * {
   padding: 0;
-  margin: 8px;
+  margin: 0px;
 }
 
 table {
@@ -20,13 +20,39 @@ tr:nth-child(even) {
 }
 
 .canvas-container {
+  background-color: #313131;
   display: flex;
   justify-content: center; 
   align-items: center;
   flex-direction: column;
 }
 
+.menu-container {
+  color: #fff;
+  background-color: #565656; 
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu {
+  font-family: arial, sans-serif;
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login {
+  margin-left: 20px;
+}
+
 .my-canvas {
+  margin: 40px;
   background: #eee;
   display: flex;
 }
@@ -35,16 +61,4 @@ tr:nth-child(even) {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#play-button {
-  font-family: arial, sans-serif;
-  color: #FFF;
-  background-color: blue;
-  font-weight: bold;
-  padding: 20px;
-  text-align: center;
-  
-  width: 200px;
-  box-sizing: border-box;
 }
