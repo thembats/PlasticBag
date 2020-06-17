@@ -10,25 +10,35 @@
 <body>
   <div class='menu-container'>
     <div class='menu'>
-      <div>Plastic Bag</div>
+      <a class='banner-text' href='index.html'>Plastic Bag</a>
       <div class='links'>
         <div class='signup'>Sign Up</div>
         <div class='login'>Login</div>
       </div>
     </div>
-  </div>  
-  <div class='canvas-container'>
-    <canvas class='my-canvas' id='myCanvas' width='720' height='480'></canvas>
-    
   </div>
+  <div class='canvas-container'>
+    <div class='info-box-container'>
+      <div class='invisible-info-box'>
+      </div>
+    </div>
+
+    <canvas class='my-canvas' id='myCanvas' width='720' height='480'></canvas>
+
+    <div class='info-box-container'>
+      <div class='info-box'>
+        <p>Some text</p>
+      </div>
+    </div>
+  </div>
+
 
   <script src='js/Bag.js'></script>
   <script src='js/Obstacle.js'></script>
   <script src='js/Pathway.js'></script>
   <script src='js/GameLogic.js'></script>
   <script src='js/GameLoop.js'></script>
-  
+
 </body>
 
 </html>
-
