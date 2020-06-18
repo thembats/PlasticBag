@@ -43,7 +43,7 @@ a.banner-text:hover {
   display: flex;
   height: 400px;
   width: 300px;
-  background-color: #3a3a3a; 
+  background-color: #3a3a3a;
   color: pink;
 }
 
@@ -87,17 +87,52 @@ a.banner-text:hover {
 }
 
 .my-canvas {
+  flex-shrink: 0;
   margin: 40px;
   background: #eee;
   display: flex;
 }
 
-@media only screen and (max-width: 1436px) {
+@media all and (max-width: 1416px) and (min-width: 750px) {
+  .canvas-container {  .canvas-container {
+    flex-direction: column;
+  }
+
+  .invisible-info-box {
+    display: none;
+  }
+    flex-direction: column;
+  }
+
+  .invisible-info-box {
+    display: none;
+  }
+}
+
+@media all and (max-width: 749px) and (min-width: 493px) {
   .canvas-container {
     flex-direction: column;
   }
 
   .invisible-info-box {
     display: none;
+  }
+  .my-canvas {
+    width: 480px;
+    height: 320px;
+  }
+}
+
+@media all and (max-width: 492px) {
+  .canvas-container {
+    flex-direction: column;
+  }
+
+  .invisible-info-box {
+    display: none;
+  }
+  .my-canvas {
+    width: 320px;
+    height: 240px;
   }
 }
