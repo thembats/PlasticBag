@@ -94,13 +94,7 @@ a.banner-text:hover {
 }
 
 @media all and (max-width: 1416px) and (min-width: 750px) {
-  .canvas-container {  .canvas-container {
-    flex-direction: column;
-  }
-
-  .invisible-info-box {
-    display: none;
-  }
+  .canvas-container {
     flex-direction: column;
   }
 
